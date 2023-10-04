@@ -13,6 +13,22 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'purple-one': '#3939AC',
+        'primary-gray': '#D9D9D9',
+        'blue-gray': '#9696C5',
+        'dark-gray': '#909090',
+        'logo-yellow': '#C4A60B'
+      },
+      fontFamily: {
+        'monda': 'Monda',
+        'mogra': 'Mogra',
+        'monteserrat': 'Montserrat Variable'
+      },
+      screens: {
+        '2xl': '1800px',
+        '4k': '2560px'
+      }
     },
   },
   plugins: [],

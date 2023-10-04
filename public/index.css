@@ -1,0 +1,79 @@
+/* navbar */
+
+  .login-button-container{
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .login-button{
+    background-color: white;
+    border: 5px solid black;
+    padding: .4rem 1.25rem .4rem 1.25rem;
+    position: relative;
+    transition: .5s;
+    cursor: pointer;
+    z-index: 3;
+  }
+  
+  .login-button:hover{
+    transform: translate(.25rem, .25rem)
+  }
+  
+  .login-button:active{
+    background-color: black; 
+    color: white;
+  }
+  
+  .login-black-bg{
+    width: 7rem;
+    height: 2.5rem;
+    position: absolute;
+    top: .9rem;
+    left: .5rem;
+    background-color: black;
+    border-radius: 25px;
+    z-index: 1;
+  }
+
+  /* end of navbar */
+  
+  /* intro section */
+  .intro{
+    background: url('chairs.png');
+    background-size: contain ;
+    position: relative;
+  }
+
+  .black-overlay{
+    height: 85vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+  /* end of intro */
+
+  /* freelancing section */
+  .box-container{
+    display: flex;
+    flex-direction:column;
+  }
+  
+  .box-top{
+    width: min(75vw,555px);
+    border-radius: 20px 20px 0 0;
+    height: 35px;
+    background-color: #4682C2;
+    position: relative;
+    top: 5px;
+  }
+  
+  .box{
+    width: min(75vw,555px);
+    height: fit-content;
+    border: 5px solid #4682C2;
+  }
+  
+  /* end of freelancing section */
