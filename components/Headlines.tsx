@@ -13,7 +13,7 @@ export default function Headlines() {
         'Money back guarantee and anti-fraud protection'
     ]
   return (
-    <div className='flex flex-col items-center lg:items-start h-screen p-4 relative bg-white'>
+    <div className='flex flex-col items-center lg:items-start h-screen justify-around lg:justify-start p-4 relative bg-white'>
       <h1 className='w-4/5 w-3/4 lg:w-2/3 text-center text-2xl md:text-5xl xl:text-6xl 4k:text-7xl font-monteserrat uppercase font-bold'>The solution for your plans at the tip of your fingers</h1>
       <div className='w-full flex justify-center md:order-3'>
         <div className='flex flex-wrap gap-8 md:gap-12 '>

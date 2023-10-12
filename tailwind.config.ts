@@ -23,7 +23,8 @@ const config: Config = {
       fontFamily: {
         'monda': 'Monda',
         'mogra': 'Mogra',
-        'monteserrat': 'Montserrat Variable'
+        'monteserrat': 'Montserrat Variable',
+        'moulpali': 'Moulpali'
       },
       screens: {
         '2xl': '1800px',

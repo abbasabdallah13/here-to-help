@@ -22,7 +22,7 @@ const Freelancing = () => {
     },[])
 
   return (
-    <div className='h-screen flex flex-col items-center justify-center p-4 bg-white'>
+    <div className='h-fit lg:h-screen flex flex-col items-center justify-center p-4 bg-white'>
         <h1 className='w-[80vw] font-bold text-center text-2xl md:text-5xl xl:text-6xl 4k:text-7xl font-monteserrat'>Embrace the freedom of freelancing, where your office can be anywhere you choose</h1>
         <div className='flex flex-col lg:flex-row items-center mt-8 gap-4 lg:gap-12 4k:gap-44'>
             <Image className="lg:order-2 w-3/4 max-w-[356px] xl:max-w-[500px] 4k:max-w-[700px]" src={freelanceImage} alt='freelancer image' width={472} height={393} />

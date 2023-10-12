@@ -79,12 +79,12 @@ function Navbar() {
                     </ul>
                     <div className='flex flex-col justify-center items-center mt-12'>
                         <div className='login-button-container mr-8'>
-                            <button className='login-button font-mogra'>
+                            <button className='login-button font-mogra rounded-3xl w-28 h-12'>
                                 Login
                             </button>
                             <div className="login-black-bg"></div>
                         </div>
-                        <a className='ml-8 mt-[5px] text-sm lowercase underline text-blue hover:text-purple-one cursor-pointer'>Register</a>
+                        <a className='mr-6 mt-[5px] text-sm lowercase underline text-blue hover:text-purple-one cursor-pointer'>Register</a>
                         </div>
                     </div>
             )

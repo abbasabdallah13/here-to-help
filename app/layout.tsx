@@ -5,7 +5,9 @@ import { Inter } from 'next/font/google'
 import '@fontsource/monda';
 import '@fontsource/mogra';
 import '@fontsource-variable/montserrat';
+import '@fontsource/moulpali';
 import '@/public/index.css'
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   )
