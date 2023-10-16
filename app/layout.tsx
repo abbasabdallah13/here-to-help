@@ -8,6 +8,8 @@ import '@fontsource-variable/montserrat';
 import '@fontsource/moulpali';
 import '@/public/index.css'
 import Footer from '@/components/Footer';
+import Provider from '@/components/Provider';
+import ModalTemplate from '@/components/ModalTemplate';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,10 +25,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+      <body className={`${inter.className} relative w-screen`}>
+        <Provider>
+          <ModalTemplate />
+          <Navbar />
+          {children}
+          <Footer />
+        </Provider>
       </body>
     </html>
   )

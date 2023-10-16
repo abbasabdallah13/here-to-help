@@ -16,13 +16,9 @@
   }
   
   .login-button:hover{
-    transform: translate(.25rem, .25rem)
+    transform: translate(.25rem, .25rem);
   }
-  
-  .login-button:active{
-    background-color: black; 
-    color: white;
-  }
+
   
   .login-black-bg{
     width: 7rem;

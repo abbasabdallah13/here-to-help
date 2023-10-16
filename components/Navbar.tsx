@@ -1,15 +1,17 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import logo from '@/public/assets/logo.png'
 import burgerMenu from '@/public/assets/burger-menu.png'
 import Image from 'next/image'
 import { IoMdArrowDropdown } from 'react-icons/io'
 import { AiOutlineClose } from 'react-icons/ai'
+import { useGlobalVariables } from '@/context/GlobalVariables'
 
 function Navbar() {
     const [pagesOverlay, setPagesOverlay] = useState(false);
     const [openSidebar, setOpenSidebar] = useState(false);
+    const { setModalType } = useGlobalVariables();
 
     useEffect(() => {
         const pagesLink = document.getElementById('pagesLink')
@@ -51,12 +53,12 @@ function Navbar() {
         {/* login button on desktops */}
         <div className='flex flex-col justify-center items-center hidden lg:block'>
             <div className='login-button-container mr-8'>
-                <button className='login-button font-mogra w-28 h-12 xl:w-40 xl:h-20 text-md xl:text-3xl rounded-full'>
+                <button onClick={() => {console.log('test'); setModalType('login_modal')}}  className='login-button font-mogra w-28 h-12 xl:w-40 xl:h-20 text-md xl:text-3xl rounded-full'>
                     Login
                 </button>
                 <div className="login-black-bg"></div>
             </div>
-            <a className='ml-10 xl:ml-12 mt-[5px] text-xs xl:text-xl lowercase underline text-blue hover:text-purple-one cursor-pointer'>Register</a>
+            <a onClick={() => setModalType('register_modal')} className='ml-10 xl:ml-12 mt-[5px] text-xs xl:text-xl lowercase underline text-blue hover:text-purple-one cursor-pointer'>Register</a>
         </div>
 
         {/* burger menu */}
@@ -79,12 +81,12 @@ function Navbar() {
                     </ul>
                     <div className='flex flex-col justify-center items-center mt-12'>
                         <div className='login-button-container mr-8'>
-                            <button className='login-button font-mogra rounded-3xl w-28 h-12'>
+                            <button onClick={() => {setModalType('login_modal'); setOpenSidebar(false)}}  className='login-button font-mogra rounded-3xl w-28 h-12'>
                                 Login
                             </button>
                             <div className="login-black-bg"></div>
                         </div>
-                        <a className='mr-6 mt-[5px] text-sm lowercase underline text-blue hover:text-purple-one cursor-pointer'>Register</a>
+                        <a onClick={() => {setModalType('register_modal'); setOpenSidebar(false)}} className='mr-6 mt-[5px] text-sm lowercase underline text-blue hover:text-purple-one cursor-pointer'>Register</a>
                         </div>
                     </div>
             )
