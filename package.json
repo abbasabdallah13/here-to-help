@@ -13,7 +13,10 @@
     "@fontsource/mogra": "^5.0.8",
     "@fontsource/monda": "^5.0.8",
     "@fontsource/moulpali": "^5.0.14",
+    "@prisma/client": "^5.4.2",
+    "bcrypt": "^5.1.1",
     "next": "latest",
+    "next-auth": "^4.23.2",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "^4.11.0"
@@ -26,6 +29,7 @@
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
+    "prisma": "^5.4.2",
     "tailwindcss": "latest",
     "typescript": "latest"
   }

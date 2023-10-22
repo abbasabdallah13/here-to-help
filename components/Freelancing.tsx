@@ -7,6 +7,8 @@ import blueGrayButton from '@/public/assets/gray-blu-btn.png'
 import blueWhiteButton from '@/public/assets/white-blu-btn.png'
 
 const Freelancing = () => {
+    const localStorageEmail = localStorage.getItem('email');
+
     const [buttonSource, setButtonSource] = useState(blueGrayButton)
 
     useEffect(() => {
@@ -33,10 +35,14 @@ const Freelancing = () => {
                         Working online as a freelancer offers an unparalleled opportunity for professional and personal growth. Imagine a career where you have the flexibility to set your own hours, choose the projects that align with your passion, and work from the comfort of your own space. As a freelancer, you're not confined to a traditional office or limited by geographical boundaries. Instead, you have the entire digital world at your fingertips.
                     </div>
                 </div>
-                <div id='JoinAsAFreelanceBtn' className='relative cursor-pointer font-monteserrat font-bold text-white hover:text-black mt-4'>
-                    <Image className='w-[70vw] max-w-[224px] 4k:max-w-[380px] h-20 4k:h-40' src={buttonSource} alt='button' width={301} height={91} />
-                    <h1 className='absolute text-md 4k:text-3xl top-6 4k:top-12 left-[1.2rem] 4k:left-[1.4rem]'>Join As a Freelancer</h1>
-                </div>
+                {
+                    !localStorageEmail && (
+                        <div id='JoinAsAFreelanceBtn' className='relative cursor-pointer font-monteserrat font-bold text-white hover:text-black mt-4'>
+                            <Image className='w-[70vw] max-w-[224px] 4k:max-w-[380px] h-20 4k:h-40' src={buttonSource} alt='button' width={301} height={91} />
+                            <h1 className='absolute text-md 4k:text-3xl top-6 4k:top-12 left-[1.2rem] 4k:left-[1.4rem]'>Join As a Freelancer</h1>
+                        </div>
+                    )
+                }
             </div>
         </div>
     </div>

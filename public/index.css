@@ -34,11 +34,6 @@
   /* end of navbar */
   
   /* intro section */
-  .intro{
-    background: url('chairs.png');
-    background-size: contain ;
-    position: relative;
-  }
 
   .black-overlay{
     height: 85vh;
