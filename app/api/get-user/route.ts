@@ -10,7 +10,6 @@ export async function POST (req: Request){
                 email
             }
         })
-        console.log('get-user-api:',user)
         return new Response(JSON.stringify({user}), {status: 200})
 
     } catch (error) {

@@ -10,8 +10,11 @@ import blurryPeopleImage from '@/public/assets/blurry-people.png'
 import { useGlobalVariables } from '@/context/GlobalVariables'
 
 export default function Intro() {
-    const localStorageEmail = localStorage.getItem('email');
-
+    let localStorageEmail;
+    useEffect(() => {
+        localStorageEmail = localStorage.getItem('email');
+    },[])
+    
     const { setModalType } = useGlobalVariables()
 
     const [searchTerm, setSearchTerm] = useState('');

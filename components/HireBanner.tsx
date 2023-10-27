@@ -7,8 +7,10 @@ import ColorfulWhiteBtn from '@/public/assets/colorfulBtn-white.png'
 import Image from 'next/image'
 
 const HireBanner = () => {
-    const localStorageEmail = localStorage.getItem('email');
-
+    let localStorageEmail;
+    useEffect(() => {
+        localStorageEmail = localStorage.getItem('email');
+    },[])
     const [buttonImage,setButtonImage] = useState(ColorfulGrayBtn)
 
     useEffect(() => {

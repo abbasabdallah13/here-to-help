@@ -7,8 +7,12 @@ import RegisterModal from './RegisterModal'
 
 function ModalTemplate() {
     const { modalType } = useGlobalVariables();
-    const localStorageEmail = localStorage.getItem('email');
-
+    
+    let localStorageEmail;
+    useEffect(() => {
+        localStorageEmail = localStorage.getItem('email');
+    },[])
+    
   return (
     <div className={`${modalType === '' ? 'hidden' : 'flex'} fixed top-0 left-0 p-0 h-screen w-full bg-black/40 items-center justify-center z-[999]`}>
       {

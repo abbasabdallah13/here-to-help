@@ -1,4 +1,7 @@
+import { sendEmail } from '@/lib/email';
 import { PrismaClient } from '@prisma/client'
+import { render } from '@react-email/render'
+import WelcomeTemplate from '@/emails/WelcomeTemplate'
 const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient()
@@ -20,6 +23,11 @@ export async function POST(req: Request){
                 data: {
                     firstName, lastName, email, gender, password: encryptedPassword
                 }
+            })
+            await sendEmail({
+                to: email,
+                subject: 'Welcome to Here to Help',
+                html: render(WelcomeTemplate({firstName, lastName}))
             })
             return new Response(JSON.stringify({newUser}), { status: 200 })
         }else{

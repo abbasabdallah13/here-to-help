@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useState, useContext } from 'react'
+import { useSession } from 'next-auth/react'
 import logo from '@/public/assets/logo.png'
 import burgerMenu from '@/public/assets/burger-menu.png'
 import Image from 'next/image'
@@ -9,6 +10,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useGlobalVariables } from '@/context/GlobalVariables'
 import { RotatingTriangles } from 'react-loader-spinner'
 import LoggedUserBadge from './LoggedUserBadge'
+import MobileLoggedUserBadge from './MobileLoggedUserBadge'
 
 function Navbar() {
     const navlinks = ['Find Talent', 'Find Job', 'About', 'Pricing', 'FAQs', 'Contact', 'Terms'];
@@ -18,7 +20,12 @@ function Navbar() {
     const [pagesOverlay, setPagesOverlay] = useState(false);
     const [openSidebar, setOpenSidebar] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const { data:session } = useSession();
+
     const { modalType, setModalType, loggedUser, setLoggedUser } = useGlobalVariables();
+
+// navbar links overlays code
 
     useEffect(() => {
         const findTalentLink = document.getElementById('findTalent')
@@ -46,10 +53,21 @@ function Navbar() {
         })
     }, [])
 
+    // local storage mail code
+
+    let localStorageEmail: any;
+
+    useEffect(()=>{
+        if(session) localStorage.setItem('email', session?.user?.email)
+    },[session])
+
+  
+
     useEffect(() => {
         // to get logged user on any page
-        const localStorageEmail = localStorage.getItem('email');
-        if(localStorageEmail){
+            localStorageEmail = localStorage.getItem('email');
+           
+            if(localStorageEmail){
             const getUser = async(email: string) => {
                 setLoading(true);
                 const response = await fetch('/api/get-user', {
@@ -62,7 +80,7 @@ function Navbar() {
             }
             getUser(localStorageEmail)
         }
-    },[modalType])
+    },[modalType, session])
 
   return (
     <div className='relative bg-white px-4 py-2 flex items-center justify-between w-full h-[15vh]'>
@@ -77,8 +95,9 @@ function Navbar() {
                             {
                                 findTalentOverlay  && (
                                     <div className='px-4 py-2 bg-primary-gray absolute left-0 top-6 2xl:top-12 4k:top-16 4k:w-fit w-40 text-sm 2xl:text-2xl 4k:text-3xl z-[5]'>
-                                        <li className={`hover:text-blue-gray cursor-pointer`}>Post a Job Offer</li>
+                                        <li className={`hover:text-blue-gray cursor-pointer`}>Find a professional</li>
                                         <li className={`mt-4 hover:text-blue-gray cursor-pointer`}>Browse Packages</li>
+                                        <li className={`mt-4 hover:text-blue-gray cursor-pointer`}>Post a Job Offer</li>
                                     </div>
                                 )
                             }
@@ -145,16 +164,10 @@ function Navbar() {
             openSidebar && (
                 <div className='w-1/2 h-screen py-4 px-2 bg-primary-gray absolute top-0 right-0 z-[5]'>
                     <ul className='text-purple-one font-monda font-bold text-lg'>
+                        {/* user badge above links if user logged in */}
                         {
                             loggedUser && (
-                                <div>
-                                    <h1 className="font-bold text-black">{loggedUser.firstName.charAt(0).toUpperCase()}{loggedUser.firstName.slice(1)} {loggedUser.lastName.charAt(0).toUpperCase()}{loggedUser.lastName.slice(1)}</h1>
-                                    <ul>
-                                        <li className="text-sm ml-2 font-light text-blue-gray underline lowercase">Account Settings</li>
-                                        <li className="text-sm ml-2 font-light text-blue-gray underline lowercase">Account</li>
-                                        <li className="text-sm ml-2 font-light text-blue-gray underline lowercase">Account</li>
-                                    </ul>
-                                </div>
+                                <MobileLoggedUserBadge />
                             )
                         }
                         {

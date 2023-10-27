@@ -7,7 +7,10 @@ import blueGrayButton from '@/public/assets/gray-blu-btn.png'
 import blueWhiteButton from '@/public/assets/white-blu-btn.png'
 
 const Freelancing = () => {
-    const localStorageEmail = localStorage.getItem('email');
+    let localStorageEmail;
+    useEffect(() => {
+        localStorageEmail = localStorage.getItem('email');
+    },[])
 
     const [buttonSource, setButtonSource] = useState(blueGrayButton)
 
