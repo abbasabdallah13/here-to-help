@@ -1,5 +1,4 @@
 import { Html, Head, Body, Text, Container, Tailwind, Img } from "@react-email/components";
-import Logo from '@/public/assets/logo.png'
 
 
 type userDetails = {

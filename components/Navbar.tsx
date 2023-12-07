@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import logo from '@/public/assets/logo.png'
 import burgerMenu from '@/public/assets/burger-menu.png'
@@ -8,25 +8,36 @@ import Image from 'next/image'
 import { IoMdArrowDropdown } from 'react-icons/io'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useGlobalVariables } from '@/context/GlobalVariables'
-import { RotatingTriangles } from 'react-loader-spinner'
 import LoggedUserBadge from './LoggedUserBadge'
 import MobileLoggedUserBadge from './MobileLoggedUserBadge'
 
 function Navbar() {
-    const navlinks = ['Find Talent', 'Find Job', 'About', 'Pricing', 'FAQs', 'Contact', 'Terms'];
+    const navlinks = [
+        {title: 'Find a professional', href: "/find-talent/find-a-professional"},
+        {title: 'Browse Packages', href: "#"},
+        {title: 'Post a Job Offer', href: "#"},
+        {title: 'Post a Package', href: "#"},
+        {title: 'Search for Jobs', href: "#"},
+        {title: 'About', href: "#"},
+        {title: 'Pricing', href: "#"},
+        {title: 'FAQs', href: "#"},
+        {title: 'Contact', href: "#"},
+        {title: 'Terms', href: "#"},
+    ];
 
     const [findTalentOverlay, setFindTalentOverlay] = useState(false);
     const [findJobOverlay, setFindJobOverlay] = useState(false)
     const [pagesOverlay, setPagesOverlay] = useState(false);
     const [openSidebar, setOpenSidebar] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [userBadgeDropDown, setUserBadgeDropDown] = useState(false);
+    const excludeComponentRef = useRef(null);
 
     const { data:session } = useSession();
 
     const { modalType, setModalType, loggedUser, setLoggedUser } = useGlobalVariables();
 
 // navbar links overlays code
-
     useEffect(() => {
         const findTalentLink = document.getElementById('findTalent')
         const findJobLink = document.getElementById('findJob')
@@ -82,10 +93,27 @@ function Navbar() {
         }
     },[modalType, session])
 
+    const anywhereClick = (event) => {
+        if(!excludeComponentRef?.current.contains(event.target)){
+            setUserBadgeDropDown(false)
+        }
+    }
+
+    useEffect(() => {
+        if(excludeComponentRef.current){
+            document.addEventListener('click', anywhereClick)
+        }
+
+        return () => document.removeEventListener("click", anywhereClick)
+
+    }, [userBadgeDropDown])
+
   return (
     <div className='relative bg-white px-4 py-2 flex items-center justify-between w-full h-[15vh]'>
         <div className='flex items-center h-full'>
-            <Image src={logo} alt='logo' width={100} height={100} className='w-20 h-20 md:w-[70px] md:h-[70px] 2xl:w-[120px] 2xl:h-[120px] 4k:w-[160px] 4k:h-[160px]' />
+            <a href="/">
+                <Image src={logo} alt='logo' width={100} height={100} className='w-16 h-16 md:w-[70px] md:h-[70px] lg:w-[85px] lg:h-[85px] 2xl:w-[120px] 2xl:h-[120px] 4k:w-[160px] 4k:h-[160px]' />
+            </a>
             {/* navlinks on desktops */}
             <ul className='text-purple-one font-monda font-bold text-sm 2xl:text-2xl 4k:text-3xl hidden lg:block'>
                         <li className='inline-block ml-12' id={'findTalent'}>
@@ -95,9 +123,13 @@ function Navbar() {
                             {
                                 findTalentOverlay  && (
                                     <div className='px-4 py-2 bg-primary-gray absolute left-0 top-6 2xl:top-12 4k:top-16 4k:w-fit w-40 text-sm 2xl:text-2xl 4k:text-3xl z-[5]'>
-                                        <li className={`hover:text-blue-gray cursor-pointer`}>Find a professional</li>
-                                        <li className={`mt-4 hover:text-blue-gray cursor-pointer`}>Browse Packages</li>
-                                        <li className={`mt-4 hover:text-blue-gray cursor-pointer`}>Post a Job Offer</li>
+                                         {
+                                                navlinks.slice(0,3).map((navlink, i) => (
+                                                    <li className={`${i>0 && 'mt-4'} hover:text-blue-gray cursor-pointer`}>
+                                                        <a href={navlink.href}>{navlink?.title}</a>
+                                                    </li>
+                                                ))
+                                        }
                                     </div>
                                 )
                             }
@@ -110,8 +142,13 @@ function Navbar() {
                             {
                                 findJobOverlay  && (
                                     <div className='px-4 py-2 bg-primary-gray absolute left-0 top-6 2xl:top-12 4k:top-16 4k:w-fit w-40 text-sm 2xl:text-2xl 4k:text-3xl z-[5]'>
-                                        <li className={`hover:text-blue-gray cursor-pointer`}>Post a Package</li>
-                                        <li className={`mt-4 hover:text-blue-gray cursor-pointer`}>Search for Jobs</li>
+                                        {
+                                                navlinks.slice(3,5).map((navlink, i) => (
+                                                    <li className={`${i>0 && 'mt-4'} hover:text-blue-gray cursor-pointer`}>
+                                                        <a href={navlink.href}>{navlink?.title}</a>
+                                                    </li>
+                                                ))
+                                        }
                                     </div>
                                 )
                             }
@@ -125,8 +162,10 @@ function Navbar() {
                                     pagesOverlay && (
                                         <div className='px-4 py-2 bg-primary-gray absolute left-0 top-6 2xl:top-12 4k:top-16 4k:w-fit w-40 text-sm 2xl:text-2xl 4k:text-3xl z-[5]'>
                                             {
-                                                navlinks.slice(2).map((navlink, i) => (
-                                                    <li className={`${i>0 && 'mt-4'} hover:text-blue-gray cursor-pointer`}>{navlink}</li>
+                                                navlinks.slice(5).map((navlink, i) => (
+                                                    <li className={`${i>0 && 'mt-4'} hover:text-blue-gray cursor-pointer`}>
+                                                        <a href={navlink.href}>{navlink?.title}</a>
+                                                    </li>
                                                 ))
                                             }
                                         </div>
@@ -141,7 +180,7 @@ function Navbar() {
             !loggedUser ? (
                 <div className='flex flex-col justify-center items-center hidden lg:block'>
                     <div className='login-button-container mr-8'>
-                        <button onClick={() => {console.log('test'); setModalType('login_modal')}}  className='login-button font-mogra w-28 h-12 xl:w-40 xl:h-20 text-md xl:text-3xl rounded-full'>
+                        <button onClick={() => {setModalType('login_modal')}} className='login-button font-mogra w-28 h-12 xl:w-40 xl:h-20 text-md xl:text-3xl rounded-full'>
                             Login
                         </button>
                         <div className="login-black-bg"></div>
@@ -149,7 +188,7 @@ function Navbar() {
                     <a onClick={() => setModalType('register_modal')} className='ml-10 xl:ml-12 mt-[5px] text-xs xl:text-xl lowercase underline text-blue hover:text-purple-one cursor-pointer'>Register</a>
                 </div>
             ) : (
-                <LoggedUserBadge />
+                <LoggedUserBadge excludeComponentRef={excludeComponentRef} userBadgeDropDown={userBadgeDropDown} setUserBadgeDropDown={setUserBadgeDropDown} />
             ) 
         }
         
@@ -157,7 +196,7 @@ function Navbar() {
         {/* burger menu */}
         {
             !openSidebar ? 
-            <div className='lg:hidden'><Image src={burgerMenu} alt='burger menu' width={50} height={50} onClick={() => setOpenSidebar(true)} /></div> : 
+            <div className='lg:hidden'><Image src={burgerMenu} alt='burger menu' width={40} height={40} onClick={() => setOpenSidebar(true)} /></div> : 
             <div className='w-full flex justify-center absolute top-4 left-0'><AiOutlineClose fontSize={'2rem'} style={{position:'relative', right:'1.5rem'}}  onClick={() => setOpenSidebar(false)} /></div>
         }
         {
@@ -172,7 +211,11 @@ function Navbar() {
                         }
                         {
                             navlinks.map(navlink => (
-                                <li className='mt-6'>{navlink}</li>
+                                <li className='mt-6'>
+                                    <a href={navlink?.href}>
+                                        {navlink?.title}
+                                    </a>
+                                </li>
                             ))
                         }
                     </ul>

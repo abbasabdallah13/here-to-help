@@ -1,15 +1,15 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import maleUser from '@/public/assets/maleUserDefaultImage.png'
 import femaleUser from '@/public/assets/femaleUserDefaultImage.png'
 import defaultUser from '@/public/assets/default-user.png'
 import dropdownIcon from "@/public/assets/dropdownIcon.png"
 import { useGlobalVariables } from '@/context/GlobalVariables'
+import { Props } from 'next/script'
 
-function LoggedUserBadge() {
-    const[userBadgeDropDown, setUserBadgeDropDown] = useState(false);
+function LoggedUserBadge({ excludeComponentRef, userBadgeDropDown, setUserBadgeDropDown }: Props) {
 
     const { setLoggedUser, loggedUser } = useGlobalVariables()
 
@@ -17,6 +17,8 @@ function LoggedUserBadge() {
         setLoggedUser(null);
         localStorage.removeItem('email');
     }
+
+
   return (
     <div className="hidden lg:flex gap-2 items-center relative">
         <h1 className="2xl:text-2xl 4k:text-3xl">Welcome, {loggedUser?.firstName.charAt(0).toUpperCase()}{loggedUser?.firstName.slice(1)}</h1>
@@ -26,7 +28,7 @@ function LoggedUserBadge() {
         </div>
         {
           userBadgeDropDown && (
-              <div className='absolute bottom-[-7.1rem] 2xl:bottom-[-8.99rem] 4k:bottom-[-9.5rem] right-2 p-2 bg-primary-gray flex flex-col z-[600] text-[#3939AC]'>
+              <div ref={excludeComponentRef} className='absolute bottom-[-7.1rem] 2xl:bottom-[-8.99rem] 4k:bottom-[-9.5rem] right-2 p-2 bg-primary-gray flex flex-col z-[600] text-[#3939AC]'>
                   <ul className='2xl:text-2xl 4k:text-3xl'>
                       <li className='cursor-pointer'>Account</li>
                       <li className='cursor-pointer'>Account</li>

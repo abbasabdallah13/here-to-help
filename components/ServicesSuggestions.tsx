@@ -107,7 +107,7 @@ function ServicesSuggestions() {
 
   return (
     <div className='flex flex-col p-4 gap-y-8 items-center h-fit lg:h-screen'>
-        <h1 className='font-monteserrat font-bold text-2xl md:text-5xl xl:text-6xl 4k:text-7xl'>Popular Services</h1>
+        <h1 className='font-monteserrat uppercase font-normal text-2xl md:text-3xl xl:text-4xl 4k:text-7xl'>Popular Services</h1>
         <p className='text-[#41425B] 2xl:text-xl 4k:text-2xl font-moulpali'>Suggestions from most viewed </p>
         {/* change category select on small screens */}
         <select onChange={(e) => changeCategory(e.target.value)} className={`capitalize rounded-md px-2 py-[2px] bg-white border-[1px] border-primary-gray text-[#4682C2] lg:hidden`} >
