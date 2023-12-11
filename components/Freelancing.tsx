@@ -9,7 +9,7 @@ import blueWhiteButton from '@/public/assets/white-blu-btn.png'
 const Freelancing = () => {
     let localStorageEmail;
     useEffect(() => {
-        localStorageEmail = localStorage.getItem('email');
+       localStorageEmail = JSON.parse(localStorage.getItem('email'))
     },[])
 
     const [buttonSource, setButtonSource] = useState(blueGrayButton)

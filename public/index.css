@@ -1,38 +1,4 @@
-/* navbar */
 
-  .login-button-container{
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .login-button{
-    background-color: white;
-    border: 5px solid black;
-    padding: .4rem 1.25rem .4rem 1.25rem;
-    position: relative;
-    transition: .5s;
-    cursor: pointer;
-    z-index: 3;
-  }
-  
-  .login-button:hover{
-    transform: translate(.25rem, .25rem);
-  }
-
-  
-  .login-black-bg{
-    width: 7rem;
-    height: 2.5rem;
-    position: absolute;
-    top: .9rem;
-    left: .5rem;
-    background-color: black;
-    border-radius: 25px;
-    z-index: 1;
-  }
-
-  /* end of navbar */
-  
   /* intro section */
 
   .black-overlay{

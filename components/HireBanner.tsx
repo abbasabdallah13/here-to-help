@@ -9,7 +9,7 @@ import Image from 'next/image'
 const HireBanner = () => {
     let localStorageEmail;
     useEffect(() => {
-        localStorageEmail = localStorage.getItem('email');
+        localStorageEmail = JSON.parse(localStorage.getItem('email'))
     },[])
     const [buttonImage,setButtonImage] = useState(ColorfulGrayBtn)
 

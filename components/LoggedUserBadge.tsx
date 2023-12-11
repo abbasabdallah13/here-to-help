@@ -8,6 +8,7 @@ import defaultUser from '@/public/assets/default-user.png'
 import dropdownIcon from "@/public/assets/dropdownIcon.png"
 import { useGlobalVariables } from '@/context/GlobalVariables'
 import { Props } from 'next/script'
+import { signOut } from 'next-auth/react'
 
 function LoggedUserBadge({ excludeComponentRef, userBadgeDropDown, setUserBadgeDropDown }: Props) {
 
@@ -16,6 +17,7 @@ function LoggedUserBadge({ excludeComponentRef, userBadgeDropDown, setUserBadgeD
     const logout = () => {
         setLoggedUser(null);
         localStorage.removeItem('email');
+        signOut({callbackUrl: '/'})
     }
 
 

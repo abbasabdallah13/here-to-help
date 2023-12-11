@@ -9,7 +9,7 @@ import '@fontsource/moulpali';
 import '@/public/index.css'
 import Footer from '@/components/Footer';
 import Provider from '@/components/Provider';
-import ModalTemplate from '@/components/ModalTemplate';
+import ModalTemplate from '@/components/modals/ModalTemplate';
 
 const inter = Inter({ subsets: ['latin'] })
 

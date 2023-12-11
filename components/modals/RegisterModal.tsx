@@ -38,9 +38,9 @@ function RegisterModal() {
         setErrorMessage(message);
         setLoading(false);
       }else if(newUser){
-        localStorage.setItem('email', newUser.email)
+        localStorage.setItem('email', JSON.stringify(newUser.email))
         setLoading(false);
-        setModalType('')
+        setModalType({type: ''})
         router.push('/')
       }
     }
@@ -61,7 +61,7 @@ function RegisterModal() {
           </div>
         ) : 
         <>
-          <AiOutlineCloseCircle className="absolute right-2 top-4 text-2xl hover:text-[#a0a0a0] cursor-pointer" onClick={() => setModalType('')}  />
+          <AiOutlineCloseCircle className="absolute right-2 top-4 text-2xl hover:text-[#a0a0a0] cursor-pointer" onClick={() => setModalType({type: ''})}  />
           <h1 className="text-2xl 2xl:text-2xl">Register</h1>
           <p className='text-red-500 text-xs'>{errorMessage && errorMessage}</p>
           <div>
@@ -70,7 +70,7 @@ function RegisterModal() {
               <input className='w-[100%] max-w-[360px] h-[57px] bg-[#d9d9d9] p-2 2xl:text-5xl uppercase' onChange={(e) => setUserDetails({...userDetails, lastName:e.target.value})}  type="text" placeholder="Last Name" />
               <input className='w-[100%] max-w-[360px] h-[57px] bg-[#d9d9d9] p-2 2xl:text-5xl uppercase' onChange={(e) => setUserDetails({...userDetails, email:e.target.value})}  type="text" placeholder="Email" />
               <div className='relative w-[100%] max-w-[360px] h-[57px]'><input className='w-[100%] max-w-[360px] h-[57px] bg-[#d9d9d9] p-2 2xl:text-5xl' onChange={(e) => setUserDetails({...userDetails, password:e.target.value})}  type={showPassword ? "text" : "password"} placeholder="PASSWORD" /><span className="absolute right-4 top-[16px] text-2xl cursor-pointer" onClick={() => setShowPassword(prev => !prev)}>{showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}</span></div>
-              <div className='relative w-[100%] max-w-[360px] h-[57px]'><input className='w-[100%] max-w-[360px] h-[57px] bg-[#d9d9d9] p-2 2xl:text-5xl' onChange={(e) => setUserDetails({...userDetails, confirmPassword:e.target.value})}  type={showPassword ? "text" : "password"} placeholder="confirm PASSWORD" /><span className="absolute right-4 top-[16px] text-2xl cursor-pointer" onClick={() => setShowPassword(prev => !prev)}>{showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}</span></div>
+              <div className='relative w-[100%] max-w-[360px] h-[57px]'><input className='w-[100%] max-w-[360px] h-[57px] bg-[#d9d9d9] p-2 2xl:text-5xl' onChange={(e) => setUserDetails({...userDetails, confirmPassword:e.target.value})}  type={showPassword ? "text" : "password"} placeholder="CONFIRM PASSWORD" /><span className="absolute right-4 top-[16px] text-2xl cursor-pointer" onClick={() => setShowPassword(prev => !prev)}>{showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}</span></div>
               <select className="w-full border-2 p-2 cursor-pointer" onChange={((e) => {setUserDetails({...userDetails, gender: e.target.value}); console.log(e.target.value)})}>
                 <option value='male'>Male</option>
                 <option value='female'>Female</option>
@@ -78,7 +78,7 @@ function RegisterModal() {
               <button className="bg-[#080744] w-[100%] max-w-[360px] h-[57px] text-white 2xl:text-5xl uppercase hover:bg-[#BBBAFF] hover:text-black" onClick={()=>createNewUser(userDetails.email)}>Create Account</button>
             </div>
           </div>
-          <p className="text-xs text-center 2xl:text-lg">Already registered ? <span onClick={() => setModalType('login_modal')} className="text-blue-400 underline hover:text-purple-600 cursor-pointer">login</span></p>
+          <p className="text-xs text-center 2xl:text-lg">Already registered ? <span onClick={() => setModalType({type: 'login_modal'})} className="text-blue-400 underline hover:text-purple-600 cursor-pointer">login</span></p>
         </>
       }
       

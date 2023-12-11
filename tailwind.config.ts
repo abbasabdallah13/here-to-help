@@ -28,6 +28,7 @@ const config: Config = {
       },
       screens: {
         '2xl': '1800px',
+        '2400': '2400px',
         '4k': '2560px'
       }
     },

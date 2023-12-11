@@ -12,7 +12,7 @@ import { useGlobalVariables } from '@/context/GlobalVariables'
 export default function Intro() {
     let localStorageEmail;
     useEffect(() => {
-        localStorageEmail = localStorage.getItem('email');
+        localStorageEmail = JSON.parse(localStorage.getItem('email'))
     },[])
     
     const { setModalType } = useGlobalVariables()
@@ -39,7 +39,7 @@ export default function Intro() {
           <p className="text-sm lg:text-md 2xl:text-lg 4k:text-3xl text-[#433D3D] font-light mt-2">Whether you're embarking on a personal project, nurturing a growing business, or simply seeking assistance with day-to-day tasks, our platform is your gateway to a vast network of trusted professionals ready to deliver quality services. Join us in exploring the endless possibilities of collaboration, where your vision becomes a reality</p>
           {
             !localStorageEmail && (
-              <Image id="introBtn" src={introBtn} alt='get started button' className="w-[60vw] max-w-[194px] 4k:max-w-[380px] h-16 4k:h-40 cursor-pointer mt-8" width={301} height={91} onClick={() => setModalType('register_modal')} />
+              <Image id="introBtn" src={introBtn} alt='get started button' className="w-[60vw] max-w-[194px] 4k:max-w-[380px] h-16 4k:h-40 cursor-pointer mt-8" width={301} height={91} onClick={() => setModalType({type:'register_modal'})} />
             )
           }
         </div>

@@ -52,9 +52,9 @@ function LoginModal() {
       setErrorMessage(message)
     }else if(user){
       setLoggedUser(user);
-      localStorage.setItem('email', user.email);
+      localStorage.setItem('email', JSON.stringify(user.email));
       setLoading(false);
-      setModalType('')
+      setModalType({type: ''})
     }
   }
 
@@ -74,7 +74,7 @@ function LoginModal() {
           </div>
         ) : 
         <>
-          <AiOutlineCloseCircle className="absolute right-2 top-4 text-2xl hover:text-[#a0a0a0] cursor-pointer" onClick={() => setModalType('')}  />
+          <AiOutlineCloseCircle className="absolute right-2 top-4 text-2xl hover:text-[#a0a0a0] cursor-pointer" onClick={() => setModalType({type: ''})}  />
         <h1 className="2xl:text-2xl">Login With</h1>
         <div>
           <div className="mb-8 2xl:mb-24">
@@ -94,12 +94,13 @@ function LoginModal() {
           </div>
           <div className="w-full flex flex-col items-center gap-y-2">
             <p className='text-red-500 w-[80%] max-w-[360px] text-xs'>{errorMessage}</p>
-            <input className='w-[80%] max-w-[360px]  h-[57px] bg-[#d9d9d9] p-2 2xl:text-xl' type="text" placeholder="LOGIN" onChange={(e) => setUserInput({...userInput, email:e.target.value})}  />
-            <input className='w-[80%] max-w-[360px]  h-[57px] bg-[#d9d9d9] p-2 2xl:text-xl' type="password" placeholder="PASSWORD" onChange={(e) => setUserInput({...userInput, password:e.target.value})}  />
+            <input className='w-[80%] max-w-[360px]  h-[57px] bg-primary-gray p-2 2xl:text-xl' type="text" placeholder="LOGIN" onChange={(e) => setUserInput({...userInput, email:e.target.value})}  />
+            <input className='w-[80%] max-w-[360px]  h-[57px] bg-primary-gray p-2 2xl:text-xl' type="password" placeholder="PASSWORD" onChange={(e) => setUserInput({...userInput, password:e.target.value})}  />
             <button className="bg-[#5A58BB] w-[80%] max-w-[360px] h-[57px] text-white 2xl:text-xl hover:bg-[#080744] hover:text-white" onClick={() => login()}>LOGIN</button>
           </div>
         </div>
-        <p className="text-xs text-center 2xl:text-lg">New user ? <span onClick={() => setModalType('register_modal')} className="text-blue-400 underline hover:text-purple-600 cursor-pointer">create an account</span></p>
+        <p className="text-xs text-center 2xl:text-lg text-blue-400 underline hover:text-purple-600 cursor-pointer" onClick={() => setModalType({type: 'forgot_password'})}>forgot password?</p>
+        <p className="text-xs text-center 2xl:text-lg">New user ? <span onClick={() => setModalType({type: 'register_modal'})} className="text-blue-400 underline hover:text-purple-600 cursor-pointer">create an account</span></p>
       </>
       }
      
