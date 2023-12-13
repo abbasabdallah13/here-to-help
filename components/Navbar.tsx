@@ -117,6 +117,9 @@ function Navbar() {
             </a>
             {/* navlinks on desktops */}
             <ul className='text-purple-one font-monda font-bold text-sm 2xl:text-2xl 4k:text-3xl hidden lg:block'>
+                        <li className='inline-block ml-12'>
+                            <a href='/'>Home</a>
+                        </li>
                         <li className='inline-block ml-12' id={'findTalent'}>
                             <div className='flex items-center relative cursor-pointer'>
                             {'Find Talent'} 
